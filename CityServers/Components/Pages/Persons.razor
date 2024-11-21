@@ -1,0 +1,47 @@
+﻿@* @page "/person"
+
+<h3>Person Liste</h3>
+
+<!-- Liste over personer -->
+<ul>
+    @foreach (var person in persons)
+    {
+        <li>
+            <button @onclick="() => ShowDetails(person)">Se detaljer for @person.Name</button>
+        </li>
+    }
+</ul>
+
+<!-- Detaljevisning -->
+@if (selectedPerson != null)
+{
+    <h4>Detaljer for @selectedPerson.Name</h4>
+    <p><strong>Id:</strong> @selectedPerson.Id</p>
+    <p><strong>Navn:</strong> @selectedPerson.Name</p>
+    <p><strong>Alder:</strong> @selectedPerson.Age</p>
+    <p><strong>By:</strong> @selectedPerson.City</p>
+}
+else
+{
+    <p>Vælg en person for at se detaljer.</p>
+}
+
+@code {
+    // Sample data
+    private static List<Person> persons = new List<Person>()
+    {
+        new Person { Id = 1, Name = "John Doe", Age = 30, City = "New York" },
+        new Person { Id = 2, Name = "Jane Smith", Age = 25, City = "Los Angeles" },
+        new Person { Id = 3, Name = "Samuel Green", Age = 35, City = "Chicago" }
+    };
+
+    // Den valgte person, der vises i detaljevisningen
+    private Person selectedPerson;
+
+    // Metode til at vise detaljer for den valgte person
+    private void ShowDetails(Person person)
+    {
+        selectedPerson = person;
+    }
+}
+ *@
